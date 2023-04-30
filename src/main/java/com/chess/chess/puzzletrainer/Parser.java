@@ -9,9 +9,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.geom.Line2D;
 import java.util.stream.IntStream;
 
 public class Parser {
@@ -139,35 +136,5 @@ public class Parser {
         System.out.println("------------------");
         System.out.println("------------------");
         return scores;
-    }
-
-    public static void parsePGN(String opening) throws IOException {
-        String name = opening;
-        String pgn;
-
-        try (BufferedReader br = new BufferedReader(new FileReader("/Users/spasojepetronijevic/Downloads/" + name + ".pgn"))) {
-            StringBuilder sb = new StringBuilder();
-            String line = br.readLine();
-
-            while (line != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                line = br.readLine();
-            }
-            pgn = sb.toString();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        int start;
-        int end;
-        while ((start = pgn.indexOf('{')) != -1) {
-            end = pgn.indexOf('}');
-            pgn = pgn.substring(0,start) + pgn.substring(end + 1);
-            System.out.println(pgn.length());
-        }
-        Writer writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream("/Users/spasojepetronijevic/Downloads/" + name + "-parsed.pgn"), "utf-8"));
-        writer.write(pgn);
-        writer.close();
     }
 }
